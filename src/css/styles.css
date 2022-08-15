@@ -12,9 +12,48 @@ body {
   line-height: 1.5;
 }
 
+ul {
+  list-style: none;
+  padding: 0;
+}
+p,
+h2 {
+  margin: 0;
+}
+.country-list__wrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.country-list__name {
+  font-weight: 600;
+  font-size: 20px;
+}
+
 #search-box {
   font: inherit;
   padding: 8px;
   max-width: 320px;
   margin-bottom: 16px;
+}
+
+#search-box:focus,
+#search-box:hover {
+  border-color: rgb(50, 50, 179);
+}
+
+.country-info {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.country-info__wrapper {
+  margin-left: 20px;
+}
+
+.country-info__span {
+  font-weight: 500;
+  font-style: italic;
 }
