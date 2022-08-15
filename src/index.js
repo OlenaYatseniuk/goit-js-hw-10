@@ -13,44 +13,31 @@ const refs = {
 refs.input.addEventListener('input', debounce(onInputSearh, DEBOUNCE_DELAY));
 
 function onInputSearh(event) {
+  clearMarkup();
   const value = event.target.value.trim();
-  // console.log(value);
-
   if (value) {
     fetchCountries(value)
       .then(data => {
-        console.log(data);
         if (data.length > 10) {
-          console.log('more than 10');
-          refs.countryList.innerHTML = '';
-          refs.countryInfo.innerHTML = '';
           Notify.info(
             'Too many matches found. Please enter a more specific name.'
           );
         } else if (data.length >= 2 && data.length <= 10) {
-          console.log(' between 2 and 10');
           const markup = renderCountriesMarkup(data);
-          refs.countryList.innerHTML = '';
-          refs.countryInfo.innerHTML = '';
           refs.countryList.insertAdjacentHTML('beforeend', markup);
         } else {
-          console.log('here');
-          refs.countryList.innerHTML = '';
-          refs.countryInfo.innerHTML = '';
           const markup = createCountryMarkup(data);
           refs.countryInfo.insertAdjacentHTML('beforeend', markup);
         }
       })
       .catch(error => {
-        console.log(error);
-        refs.countryList.innerHTML = '';
-        refs.countryInfo.innerHTML = '';
         Notify.failure('Oops, there is no country with that name');
       });
-  } else {
-    refs.countryList.innerHTML = '';
-    refs.countryInfo.innerHTML = '';
   }
+}
+function clearMarkup() {
+  refs.countryList.innerHTML = '';
+  refs.countryInfo.innerHTML = '';
 }
 
 function renderCountriesMarkup(data) {
@@ -59,9 +46,7 @@ function renderCountriesMarkup(data) {
     console.log(svg);
     return (acc += `<li class="country-list__item">
     <div class="country-list__wrapper">
-  <svg class="country-list__flag" width ="50" height ="50">
-    <use href="${svg}"></use>
-  </svg>
+  <img class="country-list__flag" src ="${svg}" width ="80" height ="50">
   <p class="country-list__name">${official}</p>
   </div>
 </li>`);
@@ -75,9 +60,7 @@ function createCountryMarkup(data) {
       { name: { official }, flags: { svg }, population, languages, capital }
     ) => {
       return (acc += `
-      <svg class="country-info__flag" width ="100" height ="100">
-        <use href="${svg}"></use>
-      </svg>
+      <img class="country-info__flag" src="${svg}" width ="100" height ="80">
       <div class="country-info__wrapper">
         <h2 class="country-info__name"><span class="country-info__span">Name: </span>${official}</h2>
         <p class="country-info__capital"><span class="country-info__span">Capital: </span>${capital}</p>

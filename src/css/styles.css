@@ -26,6 +26,9 @@ h2 {
   align-items: center;
   margin-bottom: 10px;
 }
+.country-list__flag {
+  margin-right: 20px;
+}
 
 .country-list__name {
   font-weight: 600;
