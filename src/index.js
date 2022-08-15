@@ -23,9 +23,11 @@ function onInputSearh(event) {
             'Too many matches found. Please enter a more specific name.'
           );
         } else if (data.length >= 2 && data.length <= 10) {
+          clearMarkup();
           const markup = renderCountriesMarkup(data);
           refs.countryList.insertAdjacentHTML('beforeend', markup);
         } else {
+          clearMarkup();
           const markup = createCountryMarkup(data);
           refs.countryInfo.insertAdjacentHTML('beforeend', markup);
         }
