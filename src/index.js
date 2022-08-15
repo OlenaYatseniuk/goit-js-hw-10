@@ -42,8 +42,6 @@ function clearMarkup() {
 
 function renderCountriesMarkup(data) {
   return data.reduce((acc, { name: { official }, flags: { svg } }) => {
-    console.log(official);
-    console.log(svg);
     return (acc += `<li class="country-list__item">
     <div class="country-list__wrapper">
   <img class="country-list__flag" src ="${svg}" width ="80" height ="50">
